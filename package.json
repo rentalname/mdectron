@@ -2,9 +2,12 @@
   "name": "mdectron",
   "version": "0.1.0",
   "description": "markdown editor",
-  "main": "src/main/index.js",
+  "main": "dist/main/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "electron .",
+    "prestart": "webpack"
   },
   "keywords": [
     "markdown",
