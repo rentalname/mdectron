@@ -1,4 +1,4 @@
-import { app, Menu, BrowserWindow } from 'elecrtron';
+import { app, Menu, BrowserWindow } from 'electron';
 
 function setAppMenu(options) {
   const template = [
