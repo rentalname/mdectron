@@ -6,6 +6,7 @@ module.exports = {
         "import"
     ],
     "rules": {
-      "no-console": ["warn", { "allow": ["warn", "error", "log"] }]
+      "no-console": ["warn", { "allow": ["warn", "error", "log"] }],
+      "react/prefer-stateless-function": [0]
     }
 };
