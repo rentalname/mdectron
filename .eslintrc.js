@@ -1,8 +1,17 @@
 module.exports = {
-    "extends": "airbnb",
+    "extends": ["standard", "standard-react"],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
     "plugins": [
-        "react",
+        "standard",
+        "promise",
         "jsx-a11y",
+        "react",
         "import"
     ],
     "rules": {
