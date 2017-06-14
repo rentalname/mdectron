@@ -12,11 +12,16 @@ class MainWindow {
       this.window = null
     })
   }
+
   requestText () {
     return new Promise((resolve) => {
       this.window.webContents.send('REQUEST_TEXT')
       ipcMain.once('REPLY_TEXT', (_e, text) => resolve(text))
     })
+  }
+
+  sendText (text) {
+    this.window.webContents.send('SEND_TEXT', text)
   }
 }
 
