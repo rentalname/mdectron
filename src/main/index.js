@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { app } from 'electron'
-import createMainWindow from './createMainWindow'
-import setAppMenu from './setAppMenu'
-import showSaveAsNewFileDialog from './showSaveAsNewFileDialog'
-import showOpenFileDialog from './showOpenFileDialog'
+
 import createFileManager from './createFileManager'
+import createMainWindow from './createMainWindow'
+import createPDFWindow from './createPDFWindow'
+import setAppMenu from './setAppMenu'
+import showExportPDFDialog from './showExportPDFDialog'
+import showOpenFileDialog from './showOpenFileDialog'
+import showSaveAsNewFileDialog from './showSaveAsNewFileDialog'
 
 let mainWindow = null
 let fileManager = null
@@ -38,7 +41,23 @@ function saveAsNewFile () {
 }
 
 function exportPDF () {
-  console.log('exportPDF')
+  Promise.all([ showExportPDFDialog(), mainWindow.requestText() ])
+    .then(([filePath, text]) => {
+      const pdfWindow = createPDFWindow(text)
+      pdfWindow.on('RENDERED_CONTENTS', () => {
+        pdfWindow.generatePDF()
+          .then((pdf) => fileManager.writePdf(filePath, pdf))
+          .then(() => pdfWindow.close())
+          .catch((error) => {
+            console.log('D')
+            console.log(error)
+            pdfWindow.close()
+          })
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 app.on('ready', () => {

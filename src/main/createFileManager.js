@@ -24,6 +24,13 @@ class FileManager {
   overwriteFile (text) {
     return this.saveFile(this.filePath, text)
   }
+
+  writePdf (filePath, pdf) {
+    return new Promise((resolve) => {
+      fs.writeFileSync(filePath, pdf)
+      resolve()
+    })
+  }
 }
 
 function createFileManager () {
