@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain } from 'electron'
+import { BrowserWindow, ipcMain, shell } from 'electron'
 
 const loadDevtool = require('electron-load-devtool')
 
@@ -10,6 +10,10 @@ class MainWindow {
     this.window.webContents.openDevTools()
     this.window.on('closed', () => {
       this.window = null
+    })
+    this.window.webContents.on('will-navigate', (e, url) => {
+      e.preventDefault()
+      shell.openExternal(url)
     })
   }
 
