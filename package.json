@@ -42,6 +42,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^3.0.1",
+    "jsdom": "^11.0.0",
     "mocha": "^3.4.2",
     "spectron": "^3.7.2",
     "style-loader": "^0.18.2",
