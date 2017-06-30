@@ -28,5 +28,6 @@ module.exports = {
   output: {
     filename: 'dist/[name].js'
   },
+  cache: true,
   devtool: 'source-map'
 }

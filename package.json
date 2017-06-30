@@ -8,8 +8,8 @@
     "watch": "webpack --watch",
     "start": "electron .",
     "prestart": "webpack",
-    "spec": "node test/*_test.js",
-    "prespec": "webpack"
+    "test": "NODE_ENV=test mocha test/**/*_test.js",
+    "pretest": "webpack"
   },
   "keywords": [
     "markdown",
@@ -42,6 +42,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.4.2",
     "spectron": "^3.7.2",
     "style-loader": "^0.18.2",
     "webpack": "^2.6.1"
