@@ -1,4 +1,5 @@
 const assert = require('assert')
+const { capturePage, reportLog } = require('./helper')
 const createApplication = require('./createApplication')
 const EditorPage = require('./editor.page')
 const { JSDOM } = require('jsdom')
@@ -10,7 +11,13 @@ describe('エディタ入力のテスト', function () {
     app = createApplication()
     return app.start()
   })
-  afterEach(() => {
+  afterEach(function () {
+    if (this.currentTest.state === 'failed') {
+      return Promise.all([
+        capturePage(app, this.currentTest.title),
+        reportLog(app, this.currentTest.title)
+      ]).then(() => app.stop())
+    }
     return app.stop()
   })
 
@@ -26,6 +33,15 @@ describe('エディタ入力のテスト', function () {
           const h2 = dom.querySelector('h2')
           assert.equal(h2.textContent, 'h2見出し')
         })
+    })
+  })
+
+  describe('絵文字記法で入力する', function () {
+    it('絵文字のPNG画像がレンダリングされる', function () {
+      const page = new EditorPage(app.client)
+      return page.inputText(':tada:')
+        .then(() => page.findEmojiElement('tada'))
+        .then((element) => assert(!!element))
     })
   })
 })

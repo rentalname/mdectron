@@ -20,6 +20,7 @@
   "dependencies": {
     "electron": "^1.7.3",
     "electron-load-devtool": "^0.5.1",
+    "emojione": "^3.0.3",
     "marked": "^0.3.6",
     "photon": "github:connors/photon",
     "prop-types": "^15.5.10",
